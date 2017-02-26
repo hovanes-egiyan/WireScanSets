@@ -24,6 +24,7 @@ protected:
     std::pair<double, double> sigma = { 0, 0 };
 
 public:
+    ScanResults() : TNamed(){}
     ScanResults( std::string name, double z, double sigma, double deltaSigma ) :
             TNamed( name.c_str(), name.c_str() ), zLocation( z ),
                     sigma( std::pair<double, double>( sigma, deltaSigma ) ) {

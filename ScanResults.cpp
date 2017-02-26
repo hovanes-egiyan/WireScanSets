@@ -8,5 +8,4 @@
 #include "ScanResults.hh"
 
 namespace WireScanSets {
-
 } /* namespace WireScanSets */
