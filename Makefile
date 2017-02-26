@@ -3,10 +3,10 @@
 CXXFLAGS = 	-c -g -fPIC -Wall -O2 -std=c++11 -Wall -fmessage-length=0  $(INCLUDE_DIR)
 LDFLAGS =	-g -shared -Wall -m64 
 
-ROOT_INCLUDE += $(shell root-config --incdir)
-ROOT_LIBS += $(shell root-config --libs)
+ROOT_INCLUDE += $(shell $(ROOTSYS)/bin/root-config --incdir)
+ROOT_LIBS += $(shell $(ROOTSYS)/bin/root-config --libs)
 
-INCLUDE_DIR += -I/home/hovanes/GlueX/MCB/src -I$(ROOT_INCLUDE)
+INCLUDE_DIR +=  -I$(ROOT_INCLUDE)
 
 OBJS =	ScanResults.o ScanSet.o
 

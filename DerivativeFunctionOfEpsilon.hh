@@ -12,10 +12,14 @@
 
 namespace WireScanSets {
 
-class DerivativeFunctionOfEpsilon : public FunctionOfEmittance {
+class DerivativeFunctionOfEpsilon: public FunctionOfEmittance {
 public:
-    DerivativeFunctionOfEpsilon( double epsilon ) : FunctionOfEmittance(epsilon) {}
-    DerivativeFunctionOfEpsilon( const DerivativeFunctionOfEpsilon& obj ) : DerivativeFunctionOfEpsilon(obj) {}
+	DerivativeFunctionOfEpsilon(double epsilon) :
+			FunctionOfEmittance(epsilon) {
+	}
+	DerivativeFunctionOfEpsilon(const DerivativeFunctionOfEpsilon& obj) :
+			FunctionOfEmittance(obj) {
+	}
 };
 
 } /* namespace WireScanSets */
