@@ -79,30 +79,59 @@ int main( int argc, char **argv ) {
 
 
     // December 17, 2017, after quick tuning by Todd
-    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ),         0, 2.1840, 0.150 );
-    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ),   12163, 2.0360, 0.150 );
-    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ),  16420, 0.4800, 0.060 );
+//    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ),         0, 2.1840, 0.150 );
+//    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ),   12163, 2.0360, 0.150 );
+//    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ),  16420, 0.4800, 0.060 );
+//
+//
+//    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ),         0, 0.9192, 0.080 );
+//    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ),   12163, 0.9260, 0.080 );
+//    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ),  16420, 0.3100, 0.050 );
 
 
-    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ),         0, 0.9192, 0.080 );
-    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ),   12163, 0.9260, 0.080 );
-    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ),  16420, 0.3100, 0.050 );
+//   // February 21, 2017, after beam studies
+//    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ),         0, 1.1040, 0.030 );
+//    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ),   12163, 0.8745, 0.030 );
+//    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ),  16420, 0.7630, 0.015 );
+//
+//
+//    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ),         0, 0.3890, 0.030 );
+//    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ),   12163, 0.1967, 0.030 );
+//    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ),  16420, 0.1206, 0.015 );
 
+
+    // February 22, 2017, after focusing improvement
+//    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 0.8458, 0.050 );
+//    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.6540, 0.050 );
+//    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7113, 0.025 );
+//
+//    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.5498, 0.050 );
+//    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.4845, 0.050 );
+//    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4197, 0.025 );
+
+    // February 24, 2017, before going to high luminocity
+    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 1.1550, 0.050 );
+    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.9010, 0.050 );
+    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7776, 0.025 );
+
+    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.6039, 0.050 );
+    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.5901, 0.050 );
+    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4655, 0.045 );
 
 
 //    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.14e-6 );
-    WireScanSets::ScanSet setXfeb9( "Dec17_2016X", 6.3574e-6 );
-//    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.1855e-6 );
+//    WireScanSets::ScanSet setXfeb9( "Dec17_2016X", 6.3574e-6 );
+    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.1855e-6 );
     setXfeb9.addScanResults( resultsX_5C11 );
     setXfeb9.addScanResults( resultsX_5C11B );
-    setXfeb9.addScanResults( resultsX_Rad);
+    setXfeb9.addScanResults( resultsX_Rad );
 
     //    WireScanSets::ScanSet setYfeb9( "Feb09Y", 3.44e-06 );
-    WireScanSets::ScanSet setYfeb9( "Dec17_2016Y", 3.8591e-06 );
-//    WireScanSets::ScanSet setYfeb9( "Feb09Y", 2.1567e-06 );
+//    WireScanSets::ScanSet setYfeb9( "Dec17_2016Y", 3.8591e-06 );
+    WireScanSets::ScanSet setYfeb9( "Feb09Y", 2.1567e-06 );
     setYfeb9.addScanResults( resultsY_5C11 );
     setYfeb9.addScanResults( resultsY_5C11B );
-    setYfeb9.addScanResults( resultsY_Rad);
+    setYfeb9.addScanResults( resultsY_Rad );
 
 //    setXfeb9.Print();
 
@@ -118,14 +147,14 @@ int main( int argc, char **argv ) {
 
     TH1D zeroX( "zeroX", "zerox", 100, -1000, 90000 );
     zeroX.SetMinimum( 0 );
-    zeroX.SetMaximum( 5.0 );
+    zeroX.SetMaximum( 1.5 );
     zeroX.SetXTitle( "Distance from 5C11 harp, mm");
     zeroX.SetYTitle( "#sigma_{x}^{2} (mm^{2})");
     zeroX.GetYaxis()->SetTitleOffset(1.2);
 
     TH1D zeroY( "zeroY", "zeroY", 100, -1000, 90000 );
     zeroY.SetMinimum( 0 );
-    zeroY.SetMaximum( 1.6 );
+    zeroY.SetMaximum( 1.5 );
     zeroY.SetXTitle( "Distance from 5C11 harp, mm");
     zeroY.SetYTitle( "#sigma_{y}^{2} (mm^{2})");
     zeroY.GetYaxis()->SetTitleOffset(1.2);

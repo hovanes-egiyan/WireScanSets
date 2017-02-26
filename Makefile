@@ -6,11 +6,11 @@ LDFLAGS =	-g -shared -Wall -m64
 ROOT_INCLUDE += $(shell $(ROOTSYS)/bin/root-config --incdir)
 ROOT_LIBS += $(shell $(ROOTSYS)/bin/root-config --libs)
 
-INCLUDE_DIR +=  -I$(ROOT_INCLUDE)
+INCLUDE_DIR += -I/usr/include/jsoncpp -I$(ROOT_INCLUDE)
 
 OBJS =	ScanResults.o ScanSet.o
 
-LIBS += $(ROOT_LIBS)
+LIBS += $(ROOT_LIBS)  -ljsoncpp 
 
 TARGET =	WireScanSets
 

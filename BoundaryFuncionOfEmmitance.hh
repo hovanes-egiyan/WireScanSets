@@ -45,9 +45,9 @@ public:
     virtual double operator()( double* x, double* p ) {
         double deltaX1 = p[2];
         double deltaX2 = p[3];
-        std::cout << "x= " << x[0] << " deltaX1= " << deltaX1 << " , deltaX2= " <<  deltaX2 << std::endl;
-        std::cout << "Mean value= " << ( *meanValue ) ( x, p ) << std::endl;
-        std::cout << "Der1= " << ( *dFdX1 )( x, p ) << " , Der2= " << ( *dFdX2 )( x, p ) << std::endl;
+//        std::cout << "x= " << x[0] << " deltaX1= " << deltaX1 << " , deltaX2= " <<  deltaX2 << std::endl;
+//        std::cout << "Mean value= " << ( *meanValue ) ( x, p ) << std::endl;
+//        std::cout << "Der1= " << ( *dFdX1 )( x, p ) << " , Der2= " << ( *dFdX2 )( x, p ) << std::endl;
         return ( *meanValue ) ( x, p )
                 + sign
                         * sqrt(

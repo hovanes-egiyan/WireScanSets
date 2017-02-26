@@ -125,36 +125,9 @@ public:
         }
     };
 
-//    class fitFuncSigma {
-//    protected:
-//        fitFuncSigma2 fun2;
-//    public:
-//        fitFuncSigma( double epsilon ) :
-//                fun2( epsilon ) {
-//        }
-//        fitFuncSigma( const fitFuncSigma& obj ) :
-//                fun2( obj.fun2 ) {
-//        }
-//        double operator()( double* x, double* p ) {
-//            double value2 = fun2( x, p );
-//            if ( value2 > 0 )
-//                return sqrt( value2 );
-//            else
-//                return 0;
-//        }
-//        fitFuncSigma& operator=( const fitFuncSigma& obj ) {
-//            fun2 = obj.fun2;
-//            return *this;
-//        }
-//        virtual double getEmmitance() const {
-//            return fun2.getEmmitance();
-//        }
-//    };
-
-//    fitFuncSigma  fitFuncSigmaObj;
 
 public:
-    ScanSet( std::string name, double emmitance = 0 ) :
+    ScanSet( std::string name = "", double emmitance = 0 ) :
             TNamed( name.c_str(), name.c_str() ), FunctionOfEmittance( emmitance ), scanList() {
     }
     ScanSet( std::string name, std::vector<ScanResults*>& scans, double emmitance ) :
@@ -173,8 +146,6 @@ public:
 
     virtual ScanSet& operator=( const ScanSet& set ) {
         if ( this == &set ) return *this;
-//        fitFuncSigma2Obj = set.fitFuncSigma2Obj;
-//        fitFuncSigmaObj = set.fitFuncSigmaObj;
         *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
                 ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
         *dynamic_cast<FunctionOfEmittance*>( this ) =
