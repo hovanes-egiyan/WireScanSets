@@ -109,14 +109,23 @@ int main( int argc, char **argv ) {
 //    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.4845, 0.050 );
 //    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4197, 0.025 );
 
-    // February 24, 2017, before going to high luminocity
-    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 1.1550, 0.050 );
-    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.9010, 0.050 );
-    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7776, 0.025 );
+//    // February 24, 2017, before going to high luminosity
+//    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 1.1550, 0.050 );
+//    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.9010, 0.050 );
+//    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7776, 0.025 );
+//
+//    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.6039, 0.050 );
+//    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.5901, 0.050 );
+//    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4655, 0.045 );
 
-    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.6039, 0.050 );
-    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.5901, 0.050 );
-    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4655, 0.045 );
+    // February 26, 2017
+    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 1.1630, 0.080 );
+    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.9683, 0.080 );
+    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7249, 0.040 );
+
+    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.6478, 0.070 );
+    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.6903, 0.070 );
+    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4403, 0.040 );
 
 
 //    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.14e-6 );
@@ -141,7 +150,8 @@ int main( int argc, char **argv ) {
     setYfeb9.makeGraphs();
     setYfeb9.fitGraphs( 0, 90000, kBlue );
 
-    TCanvas canv( "Canv", "Canv", 1800, 800 );
+//    TCanvas canv( "Canv", "Canv", 1800, 800 );
+    TCanvas canv( "Canv", "Canv", 1350, 600 );
     canv.Divide(2,1, 0.01, 0.01 );
 
 
