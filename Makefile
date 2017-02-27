@@ -29,4 +29,4 @@ all:	$(TARGET) testErrors
 
 
 clean:
-	rm -f $(OBJS) $(TARGET) $(TESTS) testErrors.o readSCanJSON readScanJSON.o WireScanSets.o
+	rm -f $(OBJS) $(TARGET) $(TESTS) testErrors.o readScanJSON readScanJSON.o WireScanSets.o

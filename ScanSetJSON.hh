@@ -14,20 +14,19 @@
 
 #include <json/json.h>
 
+#include "ScanResultJSON.hh"
 #include "ScanSet.hh"
-#include "ScanResultsJSON.hh"
 
 namespace WireScanSets {
 
 class ScanSetJSON : public ScanSet {
-public:
+protected:
     // these are attributes needed for ScanSetJSON class
     static std::vector<std::string> neededAttributes;
 
     static std::map<std::string,double> scannerPositions;
 
-public:
-    ScanSetJSON( Json::Value& jsonData ) :  ScanSet () {
+    virtual void buildObjectFromJSON( Json::Value& jsonData ) {
         // Verify that all required attributes exist
         for ( auto& attrib : neededAttributes ) {
             if ( !jsonData.isMember( attrib ) ) {
@@ -43,18 +42,43 @@ public:
        // Create a new object of the base class and assign the value to this
        std::string name = jsonData["location"].asString() + "-" + jsonData["date"].asString();
 
-       std::vector<ScanResults*> results;
+       std::vector<ScanResult*> results;
        for( auto& resultObjJSON : jsonData ) {
            try {
                double zPosition = getZ( jsonData["location"].asString() );
-               ScanResultsJSON* jsonResult = new ScanResultsJSON( resultObjJSON,  zPosition );
+               ScanResultJSON* jsonResult = new ScanResultJSON( resultObjJSON,  zPosition );
                results.push_back( jsonResult );
            } catch ( std::runtime_error& e ) {
                throw e;
            }
        }
-
        *dynamic_cast<ScanSet*>(this) = *(new ScanSet( name, results, jsonData["emittance"].asDouble() ) );
+    }
+
+public:
+    ScanSetJSON( Json::Value& jsonData ) :  ScanSet () {
+    	buildObjectFromJSON( jsonData );
+    }
+
+    ScanSetJSON( const std::string& fileName ) : ScanSet() {
+        std::cout << "Reading scan from " << fileName << std::endl;
+       	std::ifstream ifs( fileName );
+        if ( !ifs.is_open() ) {
+        	std::string errMsg = "Could not find file " + fileName ;
+        	throw std::runtime_error( errMsg) ;
+        }
+        std::cout << "  Found JSON file " << fileName << std::endl;
+        Json::Value scanJSON;
+        Json::Reader reader;
+        bool parsing_success = reader.parse( ifs, scanJSON );
+
+        if ( !parsing_success ) {
+            std::string errMsg = "Parsing failed for file " + fileName ;
+        	throw std::runtime_error( errMsg) ;
+        }
+        std::cout << "  Parsing successful\n";
+
+        buildObjectFromJSON( scanJSON );
     }
 
     virtual ~ScanSetJSON() {

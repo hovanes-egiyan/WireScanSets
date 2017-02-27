@@ -15,16 +15,16 @@
 
 #include "TGraphErrors.h"
 
-#include "ScanResults.hh"
 #include "FunctionOfEmittance.hh"
 #include "DerivativeFunctionOfEpsilon.hh"
 #include "BoundaryFuncionOfEmmitance.hh"
+#include "ScanResult.hh"
 
 namespace WireScanSets {
 
 class ScanSet : public TNamed, public FunctionOfEmittance {
 public:
-    std::vector<ScanResults*> scanList;
+    std::vector<ScanResult*> scanList;
 
     TGraphErrors* graphSigma = 0;
     TGraphErrors* graphSigma2 = 0;
@@ -130,7 +130,7 @@ public:
     ScanSet( std::string name = "", double emmitance = 0 ) :
             TNamed( name.c_str(), name.c_str() ), FunctionOfEmittance( emmitance ), scanList() {
     }
-    ScanSet( std::string name, std::vector<ScanResults*>& scans, double emmitance ) :
+    ScanSet( std::string name, std::vector<ScanResult*>& scans, double emmitance ) :
             TNamed( name.c_str(), name.c_str() ), FunctionOfEmittance( emmitance ), scanList( scans ) {
     }
     ScanSet( const ScanSet& set ) :
@@ -138,7 +138,7 @@ public:
         *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
                 ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
         for ( auto& oldScan : set.scanList ) {
-            this->scanList.push_back( new ScanResults( *oldScan ) );
+            this->scanList.push_back( new ScanResult( *oldScan ) );
         }
     }
 
@@ -157,15 +157,15 @@ public:
         scanList.erase( scanList.begin(), scanList.end() );
 
         for ( auto& oldScan : set.scanList ) {
-            this->scanList.push_back( new ScanResults( *oldScan ) );
+            this->scanList.push_back( new ScanResult( *oldScan ) );
         }
         return *this;
     }
 
     virtual void Print();
 
-    virtual void addScanResults( ScanResults& scan ) {
-        scanList.push_back( new ScanResults( scan ) );
+    virtual void addScanResults( ScanResult& scan ) {
+        scanList.push_back( new ScanResult( scan ) );
     }
 
     virtual TGraphErrors* makeGraphs();
@@ -174,11 +174,11 @@ public:
     virtual TF1* getUpperEdge(double xMin, double xMax, Color_t col) ;
     virtual TF1* getLowerEdge(double xMin, double xMax, Color_t col) ;
 
-    virtual const std::vector<ScanResults*>& getScanList() const {
+    virtual const std::vector<ScanResult*>& getScanList() const {
         return scanList;
     }
 
-    virtual void setScanList( const std::vector<ScanResults*>& scanMap ) {
+    virtual void setScanList( const std::vector<ScanResult*>& scanMap ) {
         this->scanList = scanMap;
     }
 

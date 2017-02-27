@@ -5,7 +5,7 @@
  *      Author: hovanes
  */
 
-#include "ScanResults.hh"
+#include "ScanResult.hh"
 
 namespace WireScanSets {
 } /* namespace WireScanSets */

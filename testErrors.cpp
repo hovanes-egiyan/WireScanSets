@@ -21,7 +21,7 @@
 #include <TStyleManager.h>
 #include <TF1.h>
 
-#include "ScanResults.hh"
+#include "ScanResult.hh"
 #include "ScanSet.hh"
 
 using namespace std;

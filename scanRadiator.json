@@ -4,17 +4,17 @@
 	"results": [
 		{
 			"direction": "X",
-			"emittance": 0.000006,
-			"results": {
+			"emittance": 0.0000051855,
+			"data": {
 				"sigma": 0.800,
 				"delta": 0.050
 			}
 		},
 		{
-			"emittance": 0.000002,
+			"emittance": 0.0000021567,
 			"direction": "Y",
-			"results": {
-				"sigma": 0.800,
+			"data": {
+				"sigma": 0.500,
 				"delta": 0.050
 			}
 		}

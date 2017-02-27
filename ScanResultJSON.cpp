@@ -5,8 +5,8 @@
  *      Author: hovanes
  */
 
-#include "ScanResultsJSON.hh"
+#include "ScanResultJSON.hh"
 
 namespace WireScanSets {
-std::vector<std::string> ScanResultsJSON::neededAttributes = { "direction", "emmitance", "results" };
+std::vector<std::string> ScanResultJSON::neededAttributes = { "direction", "emittance", "data" };
 } /* namespace WireScanSets */

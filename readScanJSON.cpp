@@ -28,7 +28,7 @@
 #include <TStyleManager.h>
 #include <TF1.h>
 
-#include "ScanResults.hh"
+#include "ScanResult.hh"
 #include "ScanSet.hh"
 
 #include "ScanSetJSON.hh"
@@ -36,28 +36,28 @@
 using namespace std;
 
 bool readScanFile( string fileName ) {
-    cout << "Reading scan from " << fileName << endl;
-    std::ifstream ifs( fileName );
-    if ( !ifs.is_open() ) {
-        cout << "Could not find file " << fileName << endl;
-        return false;
-    }
-    std::cout << "  Found JSON file " << fileName << std::endl;
-    Json::Value scanJSON;
-    Json::Reader reader;
-    bool parsing_success = reader.parse( ifs, scanJSON );
-
-    if ( !parsing_success ) {
-        std::cout << "  Parsing failed\n";
-        return false;
-    } else
-        std::cout << "  Parsing successful\n";
-
-    try {
-        WireScanSets::ScanSetJSON scanSet( scanJSON );
-    } catch  ( const std::runtime_error& e ) {
-        cerr << e.what() << endl;
-    }
+//    cout << "Reading scan from " << fileName << endl;
+//    std::ifstream ifs( fileName );
+//    if ( !ifs.is_open() ) {
+//        cout << "Could not find file " << fileName << endl;
+//        return false;
+//    }
+//    std::cout << "  Found JSON file " << fileName << std::endl;
+//    Json::Value scanJSON;
+//    Json::Reader reader;
+//    bool parsing_success = reader.parse( ifs, scanJSON );
+//
+//    if ( !parsing_success ) {
+//        std::cout << "  Parsing failed\n";
+//        return false;
+//    } else
+//        std::cout << "  Parsing successful\n";
+//
+//    try {
+//        WireScanSets::ScanSetJSON scanSet( scanJSON );
+//    } catch  ( const std::runtime_error& e ) {
+//        cerr << e.what() << endl;
+//    }
     return true;
 }
 
@@ -65,25 +65,29 @@ int main( int argc, char **argv ) {
 
     TApplication theApp( "App", &argc, argv );
 
-    // February 22, 2017, after focusing improvement
-    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 0.8458, 0.050 );
-    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.6540, 0.050 );
-    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7113, 0.025 );
+    WireScanSets::ScanSetJSON set5C11( "scan5C11.json" );
+    WireScanSets::ScanSetJSON set5C11B( "scan5C11B.json" );
+    WireScanSets::ScanSetJSON setRadiator( "scanRadiator.json" );
 
-    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.5498, 0.050 );
-    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.4845, 0.050 );
-    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4197, 0.025 );
-
-    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.1855e-6 );
-    setXfeb9.addScanResults( resultsX_5C11 );
-    setXfeb9.addScanResults( resultsX_5C11B );
-    setXfeb9.addScanResults( resultsX_Rad );
-
-    WireScanSets::ScanSet setYfeb9( "Feb09Y", 2.1567e-06 );
-    setYfeb9.addScanResults( resultsY_5C11 );
-    setYfeb9.addScanResults( resultsY_5C11B );
-    setYfeb9.addScanResults( resultsY_Rad );
-
+//    // February 22, 2017, after focusing improvement
+//    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 0.8458, 0.050 );
+//    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.6540, 0.050 );
+//    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7113, 0.025 );
+//
+//    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.5498, 0.050 );
+//    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.4845, 0.050 );
+//    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4197, 0.025 );
+//
+//    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.1855e-6 );
+//    setXfeb9.addScanResults( resultsX_5C11 );
+//    setXfeb9.addScanResults( resultsX_5C11B );
+//    setXfeb9.addScanResults( resultsX_Rad );
+//
+//    WireScanSets::ScanSet setYfeb9( "Feb09Y", 2.1567e-06 );
+//    setYfeb9.addScanResults( resultsY_5C11 );
+//    setYfeb9.addScanResults( resultsY_5C11B );
+//    setYfeb9.addScanResults( resultsY_Rad );
+//
 //    setXfeb9.Print();
 
     setXfeb9.makeGraphs();

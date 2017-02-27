@@ -5,8 +5,8 @@
  *      Author: hovanes
  */
 
-#ifndef SCANRESULTS_HH_
-#define SCANRESULTS_HH_
+#ifndef SCANRESULT_HH_
+#define SCANRESULT_HH_
 
 #include <iostream>
 #include <string>
@@ -16,7 +16,7 @@
 
 namespace WireScanSets {
 
-class ScanResults : public TNamed {
+class ScanResult : public TNamed {
 protected:
     double zLocation = 0;
 
@@ -24,20 +24,20 @@ protected:
     std::pair<double, double> sigma = { 0, 0 };
 
 public:
-    ScanResults() : TNamed(){}
-    ScanResults( std::string name, double z, double sigma, double deltaSigma ) :
+    ScanResult() : TNamed(){}
+    ScanResult( std::string name, double z, double sigma, double deltaSigma ) :
             TNamed( name.c_str(), name.c_str() ), zLocation( z ),
                     sigma( std::pair<double, double>( sigma, deltaSigma ) ) {
         return;
     }
-    ScanResults( const ScanResults& scan ) :
+    ScanResult( const ScanResult& scan ) :
             TNamed() {
         *this = scan;
     }
-    virtual ~ScanResults() {
+    virtual ~ScanResult() {
     }
 
-    virtual ScanResults& operator=( const ScanResults& scan ) {
+    virtual ScanResult& operator=( const ScanResult& scan ) {
         if ( this == &scan ) return *this;
         *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( scan.Clone(
                 ( std::string( "clonOf_" ) + std::string( scan.GetName() ) ).c_str() ) );
@@ -74,4 +74,4 @@ public:
 
 } /* namespace WireScanSets */
 
-#endif /* SCANRESULTS_HH_ */
+#endif /* SCANRESULT_HH_ */
