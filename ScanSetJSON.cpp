@@ -10,7 +10,6 @@
 using namespace std;
 
 namespace WireScanSets {
-string dummyVector1[] =  { "date", "location", "results" };
 
 vector<string> ScanSetJSON::neededAttributes = { "date", "location", "results" };
 map<string,double> ScanSetJSON::scannerPositions = { {"5C11",0.0}, {"5C11B",12.0}, {"Radiator", 16}};
