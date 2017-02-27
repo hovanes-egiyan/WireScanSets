@@ -15,11 +15,12 @@
 #include <json/json.h>
 
 #include "ScanSet.hh"
+#include "ScanResultsJSON.hh"
 
 namespace WireScanSets {
 
 class ScanSetJSON : public ScanSet {
-protected:
+public:
     // these are attributes needed for ScanSetJSON class
     static std::vector<std::string> neededAttributes;
 
@@ -46,39 +47,41 @@ public:
        for( auto& resultObjJSON : jsonData ) {
            try {
                double zPosition = getZ( jsonData["location"].asString() );
-               ScanResultsJSON* jsonResult( resultObjJSON,  zPosition );
+               ScanResultsJSON* jsonResult = new ScanResultsJSON( resultObjJSON,  zPosition );
                results.push_back( jsonResult );
            } catch ( std::runtime_error& e ) {
                throw e;
            }
        }
 
-       *this = *(new ScanSet( name, results, jsonData["emittance"].asDouble() ) );
+       *dynamic_cast<ScanSet*>(this) = *(new ScanSet( name, results, jsonData["emittance"].asDouble() ) );
     }
 
     virtual ~ScanSetJSON() {
     }
 
     virtual double getZ( std::string location ) {
-        if( getScannerPositions().count( location ) > 0 ) return getScannerPositions()[location];
-        else throw std::runtime_error( "Bad locarion error");
+        if( getScannerPositions().count( location ) > 0 ) return scannerPositions[location];
+        else throw std::runtime_error( "Bad location error");
     }
 
     static const std::vector<std::string>& getNeededAttributes()  {
         return neededAttributes;
     }
 
-    void setNeededAttributes( static const std::vector<std::string>& neededAttributes ) {
+    void setNeededAttributes(  std::vector<std::string>& neededAttributes ) {
         this->neededAttributes = neededAttributes;
     }
 
-    static const std::map<std::string, double>& getScannerPositions() const {
+    static std::map<std::string, double>& getScannerPositions() {
         return scannerPositions;
     }
 
-    void setScannerPositions( static const std::map<std::string, double>& scannerPositions ) {
+    void setScannerPositions(  std::map<std::string, double>& scannerPositions ) {
         this->scannerPositions = scannerPositions;
     }
+};
+
 };
 
 #endif /* SCANSETJSON_HH_ */

@@ -12,8 +12,7 @@
 // Copyright   : Your copyright notice
 // Description : Hello World in C, Ansi-style
 //============================================================================
-//#include <stdio.h>
-//#include <stdlib.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,6 +30,8 @@
 
 #include "ScanResults.hh"
 #include "ScanSet.hh"
+
+#include "ScanSetJSON.hh"
 
 using namespace std;
 

@@ -8,7 +8,7 @@ ROOT_LIBS += $(shell $(ROOTSYS)/bin/root-config --libs)
 
 INCLUDE_DIR += -I/usr/include/jsoncpp -I$(ROOT_INCLUDE)
 
-OBJS =	ScanResults.o ScanSet.o
+OBJS =	ScanResultsJSON.o ScanSetJSON.o ScanResults.o ScanSet.o
 
 LIBS += $(ROOT_LIBS)  -ljsoncpp 
 
@@ -20,9 +20,13 @@ $(TARGET):	$(OBJS) $(TARGET).o
 	
 testErrors:	$(OBJS) testErrors.o
 	$(CXX) -o testErrors testErrors.o $(OBJS) $(LIBS)
+	
+readScanJSON : $(OBJS) readScanJSON.o 
+	$(CXX) -o readScanJSON readScanJSON.o $(OBJS) $(LIBS)
+
 
 all:	$(TARGET) testErrors
 
 
 clean:
-	rm -f $(OBJS) $(TARGET) $(TESTS) testErrors.o WireScanSets.o
+	rm -f $(OBJS) $(TARGET) $(TESTS) testErrors.o readSCanJSON readScanJSON.o WireScanSets.o

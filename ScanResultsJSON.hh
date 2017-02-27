@@ -42,18 +42,18 @@ public:
         // Create a new object of the base class and assign the value to this
         std::string name = jsonData["direction"].asString();
 
-        *this = *( new ScanResults( name, zLocation, jsonData["sigma"].asDouble(), jsonData["delta"].asDouble() ) );
+        *dynamic_cast<ScanResults*>(this) = *( new ScanResults( name, zLocation, jsonData["sigma"].asDouble(), jsonData["delta"].asDouble() ) );
     }
     virtual ~ScanResultsJSON() {
         // TODO Auto-generated destructor stub
     }
 
-    static const std::vector<std::string>& getNeededAttributes() const {
+    static std::vector<std::string>& getNeededAttributes()  {
         return neededAttributes;
     }
 
-    void setNeededAttributes( static const std::vector<std::string>& neededAttributes ) {
-        this->neededAttributes = neededAttributes;
+    static void setNeededAttributes( std::vector<std::string>& attrib ) {
+        neededAttributes = attrib;
     }
 };
 
