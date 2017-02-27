@@ -1,0 +1,22 @@
+{
+	"date": "02/34/2017-12:01:12",
+	"location" : "Radiator", 
+	"results": [
+		{
+			"direction": "X",
+			"emittance" : 0.000006, 
+			"results": {
+				"sigma": 0.800,
+				"delta": 0.050
+			}
+		},
+		{
+			"emittance" : 0.000002, 
+			"direction": "Y",
+			"results": {
+				"sigma": 0.800,
+				"delta": 0.050
+			}
+		}
+	]
+}
