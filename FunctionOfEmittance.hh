@@ -12,13 +12,13 @@ namespace WireScanSets {
 
 class FunctionOfEmittance {
 protected:
-    double emmitance;
+    double emittance;
 public:
     FunctionOfEmittance( double epsilon ) :
-            emmitance( epsilon ) {
+            emittance( epsilon ) {
     }
     FunctionOfEmittance( const FunctionOfEmittance& obj ) :
-            emmitance( obj.emmitance ) {
+            emittance( obj.emittance ) {
     }
     virtual ~FunctionOfEmittance() {
     }
@@ -28,11 +28,14 @@ public:
 
     FunctionOfEmittance& operator=( const FunctionOfEmittance& obj ) {
         if ( this == &obj ) return *this;
-        emmitance = obj.emmitance;
+        emittance = obj.emittance;
         return *this;
     }
-    virtual double getEmmitance() const {
-        return emmitance;
+    virtual double getEmittance() const {
+        return emittance;
+    }
+    virtual double setEmittance( double emit ) {
+    	return (emittance = emit);
     }
 };
 

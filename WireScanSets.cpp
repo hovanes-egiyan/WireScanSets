@@ -119,13 +119,13 @@ int main( int argc, char **argv ) {
 //    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4655, 0.045 );
 
     // February 26, 2017
-    WireScanSets::ScanResult resultsX_5C11( string( "5C11_X" ), 0, 1.1630, 0.080 );
-    WireScanSets::ScanResult resultsX_5C11B( string( "5C11B_X" ), 12163, 0.9683, 0.080 );
-    WireScanSets::ScanResult resultsX_Rad( string( "Radiator_X" ), 16420, 0.7249, 0.040 );
+    WireScanSets::ScanResult resultsX_5C11( string( "5C11_X" ), 0, 0, 1.1630, 0.080 );
+    WireScanSets::ScanResult resultsX_5C11B( string( "5C11B_X" ), 12163, 0, 0.9683, 0.080 );
+    WireScanSets::ScanResult resultsX_Rad( string( "Radiator_X" ), 16420, 0, 0.7249, 0.040 );
 
-    WireScanSets::ScanResult resultsY_5C11( string( "5C11_Y" ), 0, 0.6478, 0.070 );
-    WireScanSets::ScanResult resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.6903, 0.070 );
-    WireScanSets::ScanResult resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4403, 0.040 );
+    WireScanSets::ScanResult resultsY_5C11( string( "5C11_Y" ), 0, 0, 0.6478, 0.070 );
+    WireScanSets::ScanResult resultsY_5C11B( string( "5C11B_Y" ), 12163, 0, 0.6903, 0.070 );
+    WireScanSets::ScanResult resultsY_Rad( string( "Radiator_Y" ), 16420, 0, 0.4403, 0.040 );
 
 
 //    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.14e-6 );

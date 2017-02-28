@@ -30,8 +30,10 @@
 
 #include "ScanResult.hh"
 #include "ScanSet.hh"
+#include "Scan.hh"
 
-#include "ScanSetJSON.hh"
+#include "ScanJSON.hh"
+#include "ScanResultJSON.hh"
 
 using namespace std;
 
@@ -61,40 +63,27 @@ bool readScanFile( string fileName ) {
     return true;
 }
 
+
 int main( int argc, char **argv ) {
 
     TApplication theApp( "App", &argc, argv );
 
-    WireScanSets::ScanSetJSON set5C11( "scan5C11.json" );
-    WireScanSets::ScanSetJSON set5C11B( "scan5C11B.json" );
-    WireScanSets::ScanSetJSON setRadiator( "scanRadiator.json" );
+	map<string, WireScanSets::Scan*> scanMap = {
+			{ "scan5C11.json", new WireScanSets::ScanJSON("scan5C11.json") },
+			{ "scan5C11B.json", new WireScanSets::ScanJSON("scan5C11B.json") },
+			{ "scanRadiator.json", new WireScanSets::ScanJSON("scanRadiator.json") }
+	};
 
-//    // February 22, 2017, after focusing improvement
-//    WireScanSets::ScanResults resultsX_5C11( string( "5C11_X" ), 0, 0.8458, 0.050 );
-//    WireScanSets::ScanResults resultsX_5C11B( string( "5C11B_X" ), 12163, 0.6540, 0.050 );
-//    WireScanSets::ScanResults resultsX_Rad( string( "Radiator_X" ), 16420, 0.7113, 0.025 );
-//
-//    WireScanSets::ScanResults resultsY_5C11( string( "5C11_Y" ), 0, 0.5498, 0.050 );
-//    WireScanSets::ScanResults resultsY_5C11B( string( "5C11B_Y" ), 12163, 0.4845, 0.050 );
-//    WireScanSets::ScanResults resultsY_Rad( string( "Radiator_Y" ), 16420, 0.4197, 0.025 );
-//
-//    WireScanSets::ScanSet setXfeb9( "Feb09X", 5.1855e-6 );
-//    setXfeb9.addScanResults( resultsX_5C11 );
-//    setXfeb9.addScanResults( resultsX_5C11B );
-//    setXfeb9.addScanResults( resultsX_Rad );
-//
-//    WireScanSets::ScanSet setYfeb9( "Feb09Y", 2.1567e-06 );
-//    setYfeb9.addScanResults( resultsY_5C11 );
-//    setYfeb9.addScanResults( resultsY_5C11B );
-//    setYfeb9.addScanResults( resultsY_Rad );
-//
-//    setXfeb9.Print();
+	WireScanSets::ScanSet setX( scanMap, string("X") );
+	WireScanSets::ScanSet setY( scanMap, string("Y") );
 
-    setXfeb9.makeGraphs();
-    setXfeb9.fitGraphs( 0, 90000, kGreen );
+	scanMap.clear();
 
-    setYfeb9.makeGraphs();
-    setYfeb9.fitGraphs( 0, 90000, kBlue );
+    setX.makeGraphs();
+    setX.fitGraphs( 0, 90000, kGreen );
+
+    setY.makeGraphs();
+    setY.fitGraphs( 0, 90000, kBlue );
 
     TCanvas canv( "Canv", "Canv", 1800, 800 );
     canv.Divide( 2, 1, 0.01, 0.01 );
@@ -120,20 +109,20 @@ int main( int argc, char **argv ) {
     canv.cd( 1 );
     gPad->SetGrid( 1, 1 );
     zeroX.Draw();
-    setXfeb9.getGraphSigma2()->SetMarkerStyle( 8 );
-    setXfeb9.getGraphSigma2()->SetMarkerSize( 1.2 );
-    setXfeb9.getGraphSigma2()->Draw( "P" );
-    setXfeb9.getUpperEdge( 0, 90000, kGreen )->Draw( "same" );
-    setXfeb9.getLowerEdge( 0, 90000, kGreen )->Draw( "same" );
+    setX.getGraphSigma2()->SetMarkerStyle( 8 );
+    setX.getGraphSigma2()->SetMarkerSize( 1.2 );
+    setX.getGraphSigma2()->Draw( "P" );
+    setX.getUpperEdge( 0, 90000, kGreen )->Draw( "same" );
+    setX.getLowerEdge( 0, 90000, kGreen )->Draw( "same" );
 
     canv.cd( 2 );
     gPad->SetGrid( 1, 1 );
     zeroY.Draw();
-    setYfeb9.getGraphSigma2()->SetMarkerStyle( 21 );
-    setYfeb9.getGraphSigma2()->SetMarkerSize( 1.2 );
-    setYfeb9.getGraphSigma2()->Draw( "P" );
-    setYfeb9.getUpperEdge( 0, 90000, kBlue )->Draw( "same" );
-    setYfeb9.getLowerEdge( 0, 90000, kBlue )->Draw( "same" );
+    setY.getGraphSigma2()->SetMarkerStyle( 21 );
+    setY.getGraphSigma2()->SetMarkerSize( 1.2 );
+    setY.getGraphSigma2()->Draw( "P" );
+    setY.getUpperEdge( 0, 90000, kBlue )->Draw( "same" );
+    setY.getLowerEdge( 0, 90000, kBlue )->Draw( "same" );
 
     theApp.Run();
 

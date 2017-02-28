@@ -15,10 +15,11 @@
 
 #include "TGraphErrors.h"
 
+#include "BoundaryFunctionOfEmittance.hh"
 #include "FunctionOfEmittance.hh"
 #include "DerivativeFunctionOfEpsilon.hh"
-#include "BoundaryFuncionOfEmmitance.hh"
 #include "ScanResult.hh"
+#include "Scan.hh"
 
 namespace WireScanSets {
 
@@ -43,7 +44,7 @@ public:
             double xVal = x[0];
             double value = 0;
             if ( beta0 > 1.0e-25 ) {
-                value = emmitance
+                value = emittance
                         * ( ( ( 1 + alpha0 * alpha0 ) / ( beta0 ) ) * xVal * xVal - 2.0 * alpha0 * xVal + beta0 );
             }
             return value;
@@ -64,7 +65,7 @@ public:
             double xVal = x[0];
             double value = 0;
             if ( beta0 > 1.0e-25 ) {
-                value = emmitance * ( ( ( 2.0 * alpha0 ) / ( beta0 ) ) * xVal * xVal - 2.0 * xVal );
+                value = emittance * ( ( ( 2.0 * alpha0 ) / ( beta0 ) ) * xVal * xVal - 2.0 * xVal );
             }
             return value;
         }
@@ -84,22 +85,22 @@ public:
             double xVal = x[0];
             double value = 0;
             if ( beta0 > 1.0e-25 ) {
-                value = emmitance * ( ( ( 1 + alpha0 * alpha0 ) / ( beta0 * beta0 ) ) * ( -1.0 ) * xVal * xVal + 1.0 );
+                value = emittance * ( ( ( 1 + alpha0 * alpha0 ) / ( beta0 * beta0 ) ) * ( -1.0 ) * xVal * xVal + 1.0 );
             }
             return value;
         }
     };
 
-    class sigma2_plus_dSigma2 : public BoundaryFuncionOfEmmitance {
+    class sigma2_plus_dSigma2 : public BoundaryFunctionOfEmittance {
     public:
         sigma2_plus_dSigma2( double epsilon ) :
-                BoundaryFuncionOfEmmitance( epsilon, +1 ) {
+                BoundaryFunctionOfEmittance( epsilon, +1 ) {
             dFdX1 =  new dSigma2_dAlpha0( epsilon ) ;
             dFdX2 =  new dSigma2_dBeta0( epsilon ) ;
             meanValue = new fitFuncSigma2( epsilon ) ;
         }
         sigma2_plus_dSigma2( const sigma2_plus_dSigma2& obj ) :
-                BoundaryFuncionOfEmmitance( obj ) {
+                BoundaryFunctionOfEmittance( obj ) {
         }
         virtual ~sigma2_plus_dSigma2() {
 //            if ( dFdX1 != nullptr ) delete dFdX1;
@@ -107,16 +108,16 @@ public:
 //            if ( meanValue != nullptr ) delete meanValue;
         }
     };
-    class sigma2_minus_dSigma2 : public BoundaryFuncionOfEmmitance {
+    class sigma2_minus_dSigma2 : public BoundaryFunctionOfEmittance {
     public:
         sigma2_minus_dSigma2( double epsilon ) :
-                BoundaryFuncionOfEmmitance( epsilon, -1 ) {
+                BoundaryFunctionOfEmittance( epsilon, -1 ) {
             dFdX1 =  new dSigma2_dAlpha0( epsilon ) ;
             dFdX2 =  new dSigma2_dBeta0( epsilon ) ;
             meanValue = new fitFuncSigma2( epsilon ) ;
         }
         sigma2_minus_dSigma2( const sigma2_minus_dSigma2& obj ) :
-                BoundaryFuncionOfEmmitance( obj ) {
+                BoundaryFunctionOfEmittance( obj ) {
         }
         virtual ~sigma2_minus_dSigma2() {
 //            if ( dFdX1 != nullptr ) delete dFdX1;
@@ -140,6 +141,36 @@ public:
         for ( auto& oldScan : set.scanList ) {
             this->scanList.push_back( new ScanResult( *oldScan ) );
         }
+    }
+
+
+    ScanSet( std::map<std::string,Scan*>& scanMap, std::string dir ) : FunctionOfEmittance(0) {
+    	std::cout << "Direction is " << dir;
+    	unsigned scanCounter = 0;
+    	double oldEmittance = 0;
+    	double oldDispersion = 0;
+    	// Loops over all the results from the provided map of results
+    	for( auto& scanIt : scanMap ) {
+//    		auto& fileName = scanIt.first;
+    		auto& scanPtr = scanIt.second;
+    		// Make sure emittances are the same for the results fo the direction
+    		double newEmittance = scanPtr->getResult(dir)->getEmittance();
+    		if( scanCounter > 0 && newEmittance != oldEmittance ) {
+    			std::string errMsg = "Emittances for " + dir + " in scans are different " ;
+    			throw std::runtime_error( errMsg );
+    		}
+    		oldEmittance = newEmittance;
+    		// Make sure that the dispersions are the same for the results being combined
+    		double newDispersion = scanPtr->getDispersion();
+    		if( scanCounter > 0 && newDispersion != oldDispersion ) {
+    			std::string errMsg = "Dispersions  in scans are different " ;
+    			throw std::runtime_error( errMsg );
+    		}
+    		oldDispersion = newDispersion;
+    		// add to the list of the results
+    		this->scanList.push_back( new ScanResult( *scanPtr->getResult(dir) ) );
+    	}
+    	this->setEmittance(oldEmittance);
     }
 
     virtual ~ScanSet();

@@ -8,7 +8,7 @@ ROOT_LIBS += $(shell $(ROOTSYS)/bin/root-config --libs)
 
 INCLUDE_DIR += -I/usr/include/jsoncpp -I$(ROOT_INCLUDE)
 
-OBJS =	ScanResultsJSON.o ScanSetJSON.o ScanResults.o ScanSet.o
+OBJS =	ScanResultJSON.o  ScanResult.o ScanJSON.o Scan.o ScanSet.o 
 
 LIBS += $(ROOT_LIBS)  -ljsoncpp 
 

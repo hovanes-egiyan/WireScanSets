@@ -1,19 +1,21 @@
 /*
- * BoundaryFuncionOfEmmitance.hh
+ * BoundaryFunctionOfEmittance.hh
  *
  *  Created on: Feb 13, 2017
  *      Author: hovanes
  */
 
-#ifndef BOUNDARYFUNCIONOFEMMITANCE_HH_
-#define BOUNDARYFUNCIONOFEMMITANCE_HH_
+#ifndef BOUNDARYFUNCTIONOFEMITTANCE_HH_
+#define BOUNDARYFUNCTIONOFEMITTANCE_HH_
+
+#include <math.h>
 
 #include "FunctionOfEmittance.hh"
 #include "DerivativeFunctionOfEpsilon.hh"
 
 namespace WireScanSets {
 
-class BoundaryFuncionOfEmmitance : public FunctionOfEmittance {
+class BoundaryFunctionOfEmittance : public FunctionOfEmittance {
 protected:
     DerivativeFunctionOfEpsilon* dFdX1 = nullptr;
     DerivativeFunctionOfEpsilon* dFdX2 = nullptr;
@@ -21,20 +23,20 @@ protected:
     double sign = 1.0;
 
 public:
-    BoundaryFuncionOfEmmitance( double epsilon, double sgn = 1.0 ) :
+    BoundaryFunctionOfEmittance( double epsilon, double sgn = 1.0 ) :
             FunctionOfEmittance( epsilon ), dFdX1( nullptr ), dFdX2( nullptr ), meanValue( nullptr ), sign( sgn ) {
     }
-    BoundaryFuncionOfEmmitance( const BoundaryFuncionOfEmmitance& obj ) :
+    BoundaryFunctionOfEmittance( const BoundaryFunctionOfEmittance& obj ) :
             FunctionOfEmittance( obj ) {
         *this = obj;
     }
 
-    virtual ~BoundaryFuncionOfEmmitance() {}
+    virtual ~BoundaryFunctionOfEmittance() {}
 
-    BoundaryFuncionOfEmmitance& operator=( const BoundaryFuncionOfEmmitance& obj ) {
+    BoundaryFunctionOfEmittance& operator=( const BoundaryFunctionOfEmittance& obj ) {
         if ( this == &obj ) return *this;
         ( *dynamic_cast<FunctionOfEmittance*>( this ) ) =
-                *dynamic_cast<FunctionOfEmittance*>( const_cast<BoundaryFuncionOfEmmitance*>( &obj ) );
+                *dynamic_cast<FunctionOfEmittance*>( const_cast<BoundaryFunctionOfEmittance*>( &obj ) );
         dFdX1 = obj.dFdX1;
         dFdX2 = obj.dFdX2;
         meanValue = obj.meanValue;
@@ -90,4 +92,4 @@ public:
 
 } /* namespace WireScanSets */
 
-#endif /* BOUNDARYFUNCIONOFEMMITANCE_HH_ */
+#endif /* BOUNDARYFUNCTIONOFEMITTANCE_HH_ */

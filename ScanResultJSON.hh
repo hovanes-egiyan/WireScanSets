@@ -53,7 +53,7 @@ protected:
 				throw std::runtime_error(errMsge);
 			}
 		}
-		std::cout << "Will call constructor with arguments : " << std::endl;
+		std::cout << "Will call ScanResult constructor with arguments : " << std::endl;
 		;
 		for (auto& attrib : neededAttributes) {
 			std::cout << attrib << " : " << jsonData[attrib] << std::endl;
@@ -62,10 +62,12 @@ protected:
 		// Create a new object of the base class and assign the value to this
 		std::string name = jsonData["direction"].asString();
 
+		double emit = jsonData["emittance"].asDouble();
+
 		ScanData data = jsonData["data"];
 
 		*dynamic_cast<ScanResult*>(this) = *(new ScanResult(name, zLocation,
-				data.getSigma(), data.getDelta() ) );
+				emit, data.getSigma(), data.getDelta()));
 		return;
 	}
 
@@ -75,7 +77,6 @@ public:
 		buildObjectFromJSON(jsonData, zLocation);
 	}
 	virtual ~ScanResultJSON() {
-		// TODO Auto-generated destructor stub
 	}
 
 	static std::vector<std::string>& getNeededAttributes() {

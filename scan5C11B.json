@@ -1,13 +1,13 @@
 {
 	"date": "02/34/2017-12:01:12",
-	"location": "Radiator",
+	"location": "5C11B",
 	"dispersion": 0.0005,
 	"results": [
 		{
 			"direction": "X",
 			"emittance": 0.0000051855,
 			"data": {
-				"sigma": 0.800,
+				"sigma": 1.300,
 				"delta": 0.050
 			}
 		},
@@ -15,7 +15,7 @@
 			"emittance": 0.0000021567,
 			"direction": "Y",
 			"data": {
-				"sigma": 0.500,
+				"sigma": 1.000,
 				"delta": 0.050
 			}
 		}

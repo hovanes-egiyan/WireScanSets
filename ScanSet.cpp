@@ -19,7 +19,7 @@ ScanSet::~ScanSet() {
 }
 
 void ScanSet::Print() {
-    cout << "Scan Set " << GetName() << " with emmitance " << getEmmitance() << " : ";
+    cout << "Scan Set " << GetName() << " with emittance " << getEmittance() << " : ";
     for ( auto& scanPtr : scanList ) {
         scanPtr->Print();
     }
@@ -52,10 +52,10 @@ TF1* ScanSet::fitGraphs( double xMin, double xMax, Color_t col ) {
 //    TF1* fitFun2 = new TF1( "sigma2", "pol2", xMin, xMax );
 //    graphSigma2->Fit( fitFun2, "", "", xMin, xMax );
 //
-    TF1* fitFun2 = new TF1( "sigma2", fitFuncSigma2( emmitance ), xMin, xMax, 2 );
+    TF1* fitFun2 = new TF1( "sigma2", fitFuncSigma2( emittance ), xMin, xMax, 2 );
     fitFun2->SetParName( 0, "alpha0" );
     fitFun2->SetParName( 1, "beta0" );
-    fitFun2->SetParameter( 0, scanList[0]->getSigma2().second / emmitance );
+    fitFun2->SetParameter( 0, scanList[0]->getSigma2().second / emittance );
     fitFun2->SetParameter( 1, 0.0 );
     fitFun2->SetParLimits( 1, 1.0e-25, 10000000 );
 
@@ -71,10 +71,10 @@ TF1* ScanSet::fitGraphs( double xMin, double xMax, Color_t col ) {
     graphSigma->SetMarkerColor( col );
     graphSigma->SetLineColor( col );
 
-//    TF1* fitFun = new TF1( "sigma", fitFuncSigma(emmitance), xMin, xMax, 2 );
+//    TF1* fitFun = new TF1( "sigma", fitFuncSigma(emittance), xMin, xMax, 2 );
 //    fitFun->SetParName( 0, "alpha0" );
 //    fitFun->SetParName( 1, "beta0" );
-//    fitFun->SetParameter( 0, scanList[0]->getSigma2().second / emmitance );
+//    fitFun->SetParameter( 0, scanList[0]->getSigma2().second / emittance );
 //    fitFun->SetParameter( 1, 0.0 );
 //    fitFun->SetParLimits( 1, 1.0e-25, 10000000);
 
@@ -91,7 +91,7 @@ TF1* ScanSet::fitGraphs( double xMin, double xMax, Color_t col ) {
 }
 
 TF1* ScanSet::getUpperEdge( double xMin, double xMax, Color_t col ) {
-    TF1* upperEdge = new TF1( "ul_sigma2", sigma2_plus_dSigma2( emmitance ), xMin, xMax, 4 );
+    TF1* upperEdge = new TF1( "ul_sigma2", sigma2_plus_dSigma2( emittance ), xMin, xMax, 4 );
     upperEdge->SetParameter( 0, graphSigma2->GetFunction( "sigma2" )->GetParameter( 0 ) );
     upperEdge->SetParameter( 1, graphSigma2->GetFunction( "sigma2" )->GetParameter( 1 ) );
     upperEdge->SetParameter( 2, graphSigma2->GetFunction( "sigma2" )->GetParError( 0 ) );
@@ -102,7 +102,7 @@ TF1* ScanSet::getUpperEdge( double xMin, double xMax, Color_t col ) {
 }
 
 TF1* ScanSet::getLowerEdge( double xMin, double xMax, Color_t col ) {
-    TF1* upperEdge = new TF1( "ll_sigma2", sigma2_minus_dSigma2( emmitance ), xMin, xMax, 4 );
+    TF1* upperEdge = new TF1( "ll_sigma2", sigma2_minus_dSigma2( emittance ), xMin, xMax, 4 );
     upperEdge->SetParameter( 0, graphSigma2->GetFunction( "sigma2" )->GetParameter( 0 ) );
     upperEdge->SetParameter( 1, graphSigma2->GetFunction( "sigma2" )->GetParameter( 1 ) );
     upperEdge->SetParameter( 2, graphSigma2->GetFunction( "sigma2" )->GetParError( 0 ) );
