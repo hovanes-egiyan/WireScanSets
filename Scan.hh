@@ -48,9 +48,12 @@ public:
 	Scan(const Scan& scan) :
 			TNamed() {
 		// Copy the TNamed part using Clone.
+//		*dynamic_cast<TNamed*>(this) =
+//				*dynamic_cast<TNamed*>(scan.Clone(
+//						(std::string("clonOf_") + std::string(scan.GetName())).c_str()));
 		*dynamic_cast<TNamed*>(this) =
-				*dynamic_cast<TNamed*>(scan.Clone(
-						(std::string("clonOf_") + std::string(scan.GetName())).c_str()));
+				*dynamic_cast<TNamed*>(scan.Clone( scan.GetName() ) );
+
 		// Deep-copy the map of results of the scan object
 		for (auto& oldScanIter : scan.scanMap) {
 			auto& rName = oldScanIter.first;
@@ -64,9 +67,11 @@ public:
 	Scan& operator=( const Scan& scan ) {
 		if( this == &scan ) return *this;
 		// Copy the TNamed part using Clone.
+//		*dynamic_cast<TNamed*>(this) =
+//				*dynamic_cast<TNamed*>(scan.Clone(
+//						(std::string("clonOf_") + std::string(scan.GetName())).c_str()));
 		*dynamic_cast<TNamed*>(this) =
-				*dynamic_cast<TNamed*>(scan.Clone(
-						(std::string("clonOf_") + std::string(scan.GetName())).c_str()));
+				*dynamic_cast<TNamed*>(scan.Clone( scan.GetName() ) );
 		// Clear the existing map of results.
 		scanMap.clear();
 		// Deep-copy the map of results of the scan object in the argument

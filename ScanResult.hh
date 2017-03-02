@@ -53,9 +53,12 @@ public:
 	virtual ScanResult& operator=(const ScanResult& scan) {
 		if (this == &scan)
 			return *this;
+//		*dynamic_cast<TNamed*>(this) =
+//				*dynamic_cast<TNamed*>(scan.Clone(
+//						(std::string("clonOf_") + std::string(scan.GetName())).c_str()));
 		*dynamic_cast<TNamed*>(this) =
-				*dynamic_cast<TNamed*>(scan.Clone(
-						(std::string("clonOf_") + std::string(scan.GetName())).c_str()));
+				*dynamic_cast<TNamed*>(scan.Clone( scan.GetName() ) );
+
 		zLocation = scan.zLocation;
 		emittance = scan.emittance;
 		sigma = scan.sigma;

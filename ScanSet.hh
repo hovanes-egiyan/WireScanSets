@@ -136,8 +136,10 @@ public:
     }
     ScanSet( const ScanSet& set ) :
             FunctionOfEmittance( set ) {
-        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
-                ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
+//        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
+//                ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
+        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone( set.GetName() ) );
+
         for ( auto& oldScan : set.scanList ) {
             this->scanList.push_back( new ScanResult( *oldScan ) );
         }
@@ -145,7 +147,11 @@ public:
 
 
     ScanSet( std::map<std::string,Scan*>& scanMap, std::string dir ) : FunctionOfEmittance(0) {
-    	std::cout << "Direction is " << dir;
+    	std::cout << "Direction is " << dir << std::endl;
+    	for( auto& scanIt : scanMap ) {
+    		std::cout << "Received Scan key is " << scanIt.first << " Scan pointer is " << scanIt.second << std::endl;
+    	}
+
     	unsigned scanCounter = 0;
     	double oldEmittance = 0;
     	double oldDispersion = 0;
@@ -154,6 +160,7 @@ public:
 //    		auto& fileName = scanIt.first;
     		auto& scanPtr = scanIt.second;
     		// Make sure emittances are the same for the results fo the direction
+    		std::cout << "Direction is " << dir << " ,  resuts pointer is " << scanPtr->getResult(dir) << std::endl; ;
     		double newEmittance = scanPtr->getResult(dir)->getEmittance();
     		if( scanCounter > 0 && newEmittance != oldEmittance ) {
     			std::string errMsg = "Emittances for " + dir + " in scans are different " ;
@@ -177,8 +184,10 @@ public:
 
     virtual ScanSet& operator=( const ScanSet& set ) {
         if ( this == &set ) return *this;
-        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
-                ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
+//        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
+//                ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
+        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone( set.GetName() ) );
+
         *dynamic_cast<FunctionOfEmittance*>( this ) =
                 *dynamic_cast<FunctionOfEmittance*>( const_cast<ScanSet*>( &set ) );
 

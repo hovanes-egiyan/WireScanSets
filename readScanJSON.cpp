@@ -27,6 +27,7 @@
 #include <TROOT.h>
 #include <TStyleManager.h>
 #include <TF1.h>
+#include <TSystem.h>
 
 #include "ScanResult.hh"
 #include "ScanSet.hh"
@@ -66,6 +67,11 @@ bool readScanFile( string fileName ) {
 
 int main( int argc, char **argv ) {
 
+		for (int sig = 0; sig < kMAXSIGNALS; sig++) {
+			gSystem->ResetSignal((ESignals) sig);
+		}
+
+
     TApplication theApp( "App", &argc, argv );
 
 	map<string, WireScanSets::Scan*> scanMap = {
@@ -74,6 +80,14 @@ int main( int argc, char **argv ) {
 			{ "scanRadiator.json", new WireScanSets::ScanJSON("scanRadiator.json") }
 	};
 
+	for( auto& scanIt : scanMap ) {
+		cout << "Scan key is " << scanIt.first << " Scan pointer is " << scanIt.second << endl;
+		cout << "X result is " << scanIt.second->getResult("X") << endl;
+	}
+
+	usleep( 2000000 );
+
+	cout << "Creating sets" << endl;
 	WireScanSets::ScanSet setX( scanMap, string("X") );
 	WireScanSets::ScanSet setY( scanMap, string("Y") );
 
@@ -90,14 +104,14 @@ int main( int argc, char **argv ) {
 
     TH1D zeroX( "zeroX", "zerox", 100, -1000, 90000 );
     zeroX.SetMinimum( 0 );
-    zeroX.SetMaximum( 1.2 );
+    zeroX.SetMaximum( 4.0 );
     zeroX.SetXTitle( "Distance from 5C11 harp, mm" );
     zeroX.SetYTitle( "#sigma_{x}^{2} (mm^{2})" );
     zeroX.GetYaxis()->SetTitleOffset( 1.2 );
 
     TH1D zeroY( "zeroY", "zeroY", 100, -1000, 90000 );
     zeroY.SetMinimum( 0 );
-    zeroY.SetMaximum( 1.2 );
+    zeroY.SetMaximum( 4.0 );
     zeroY.SetXTitle( "Distance from 5C11 harp, mm" );
     zeroY.SetYTitle( "#sigma_{y}^{2} (mm^{2})" );
     zeroY.GetYaxis()->SetTitleOffset( 1.2 );
@@ -125,6 +139,8 @@ int main( int argc, char **argv ) {
     setY.getLowerEdge( 0, 90000, kBlue )->Draw( "same" );
 
     theApp.Run();
+
+    cout << "Exiting" << endl;
 
     return 0;
 }

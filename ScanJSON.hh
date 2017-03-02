@@ -65,6 +65,8 @@ protected:
 				ScanResultJSON* jsonResult = new ScanResultJSON(resultObjJSON,
 						zPosition);
 				results[jsonResult->GetName()] = jsonResult;
+				std::cout << "Cread ScanResultJSON object called " << jsonResult->GetName()<<
+						" at location " << results[jsonResult->GetName()] << std::endl;
 			} catch (std::runtime_error& e) {
 				throw e;
 			}
@@ -72,9 +74,11 @@ protected:
 		// Create a Scan objects with previously filled map of result objects.
 		std::cout << "Creating Scan object " << std::endl;
 		*dynamic_cast<Scan*>(this) = *(new Scan(name, results, disp ));
+		std::cout << "Scan object has been created" << std::endl;
 		// Clear the newly created map since the Scan objects creates a copy of the results map with
 		// new pointers in it.
 		results.clear();
+		std::cout << "Map cleared" << std::endl;
 	}
 
 public:
