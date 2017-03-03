@@ -6,11 +6,11 @@ LDFLAGS =	-g -shared -Wall -m64
 ROOT_INCLUDE += $(shell $(ROOTSYS)/bin/root-config --incdir)
 ROOT_LIBS += $(shell $(ROOTSYS)/bin/root-config --libs)
 
-INCLUDE_DIR += -I/usr/include/jsoncpp -I$(ROOT_INCLUDE)
+INCLUDE_DIR += -I/usr/include/jsoncpp -I/usr/include/boost -I$(ROOT_INCLUDE) 
 
-OBJS =	ScanResultJSON.o  ScanResult.o ScanJSON.o Scan.o ScanSet.o 
+OBJS =	ScanResultJSON.o  ScanResult.o ScanJSON.o Scan.o ScanSet.o FileNameFinder.o 
 
-LIBS += $(ROOT_LIBS)  -ljsoncpp 
+LIBS += $(ROOT_LIBS)  -ljsoncpp -lboost_program_options
 
 TARGET =	WireScanSets
 
@@ -24,9 +24,12 @@ testErrors:	$(OBJS) testErrors.o
 readScanJSON : $(OBJS) readScanJSON.o 
 	$(CXX) -o readScanJSON readScanJSON.o $(OBJS) $(LIBS)
 
+readScanArrayJSON : $(OBJS) readScanArrayJSON.o 
+	$(CXX) -o readScanArrayJSON readScanArrayJSON.o $(OBJS) $(LIBS)
+	
 
 all:	$(TARGET) testErrors
 
 
 clean:
-	rm -f $(OBJS) $(TARGET) $(TESTS) testErrors.o readScanJSON readScanJSON.o WireScanSets.o
+	rm -f $(OBJS) $(TARGET) $(TESTS) testErrors.o readScanJSON readScanArrayJSON readScanJSON.o readScanArrayJSON.o WireScanSets.o

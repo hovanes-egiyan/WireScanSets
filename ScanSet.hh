@@ -136,13 +136,39 @@ public:
     }
     ScanSet( const ScanSet& set ) :
             FunctionOfEmittance( set ) {
-//        *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone(
-//                ( std::string( "clonOf_" ) + std::string( set.GetName() ) ).c_str() ) );
         *dynamic_cast<TNamed*>( this ) = *dynamic_cast<TNamed*>( set.Clone( set.GetName() ) );
 
         for ( auto& oldScan : set.scanList ) {
             this->scanList.push_back( new ScanResult( *oldScan ) );
         }
+    }
+
+
+    ScanSet( std::vector<Scan>& scanVector, std::string dir ) : FunctionOfEmittance(0) {
+    	unsigned scanCounter = 0;
+    	double oldEmittance = 0;
+    	double oldDispersion = 0;
+    	// Loops over all the results from the provided map of results
+    	for( auto& scan : scanVector ) {
+    		// Make sure emittances are the same for the results fo the direction
+    		std::cout << "Direction is " << dir << " ,  resuts pointer is " << scan.getResult(dir) << std::endl; ;
+    		double newEmittance = scan.getResult(dir)->getEmittance();
+    		if( scanCounter > 0 && newEmittance != oldEmittance ) {
+    			std::string errMsg = "Emittances for " + dir + " in scans are different " ;
+    			throw std::runtime_error( errMsg );
+    		}
+    		oldEmittance = newEmittance;
+    		// Make sure that the dispersions are the same for the results being combined
+    		double newDispersion = scan.getDispersion();
+    		if( scanCounter > 0 && newDispersion != oldDispersion ) {
+    			std::string errMsg = "Dispersions  in scans are different " ;
+    			throw std::runtime_error( errMsg );
+    		}
+    		oldDispersion = newDispersion;
+    		// add to the list of the results
+    		this->scanList.push_back( new ScanResult( *scan.getResult(dir) ) );
+    	}
+    	this->setEmittance(oldEmittance);
     }
 
 

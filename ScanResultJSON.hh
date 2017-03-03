@@ -44,6 +44,9 @@ protected:
 	// these are attributes needed for ScanSetJSON class
 	static std::vector<std::string> neededAttributes;
 
+	// Value for the attribute datatype in JSON
+	static std::string dataType ;
+
 	virtual void buildObjectFromJSON(Json::Value& jsonData, double zLocation) {
 		// Verify that all required attributes exist
 		for (auto& attrib : neededAttributes) {
@@ -52,6 +55,11 @@ protected:
 						+ attrib + ">";
 				throw std::runtime_error(errMsge);
 			}
+		}
+		if( jsonData["datatype"].asString() != dataType ) {
+			std::string errMsg = std::string("Expected datatype <")
+					+ dataType + "> but got " + jsonData[""].asString() + ">";
+			throw std::runtime_error(errMsg);
 		}
 		std::cout << "Will call ScanResult constructor with arguments : " << std::endl;
 		;

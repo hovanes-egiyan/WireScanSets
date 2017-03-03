@@ -1,14 +1,15 @@
 /*
- * readScanJSON.cpp
+ * readScanArrayJSON.cpp
  *
- *  Created on: Feb 24, 2017
- *      Author: hovanes
+ *  Created on: Mar 2, 2017
+ *      Author: Hovanes Egiyan
  */
 
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <map>
+#include <vector>
 
 #include <json/json.h>
 
@@ -28,6 +29,8 @@
 #include "ScanJSON.hh"
 #include "ScanResultJSON.hh"
 
+#include "FileNameFinder.hh"
+
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -36,27 +39,41 @@ int main(int argc, char **argv) {
 		gSystem->ResetSignal((ESignals) sig);
 	}
 
+	WireScanSets::FileNameFinder fileFinder( &argc, argv );
 	TApplication theApp("App", &argc, argv);
 
-	map<string, WireScanSets::Scan*> scanMap = { { "scan5C11.json",
-			new WireScanSets::ScanJSON("scan5C11.json") }, { "scan5C11B.json",
-			new WireScanSets::ScanJSON("scan5C11B.json") },
-			{ "scanRadiator.json", new WireScanSets::ScanJSON(
-					"scanRadiator.json") } };
+	string fileName = fileFinder.getFullFileName();
 
-	for (auto& scanIt : scanMap) {
-		cout << "Scan key is " << scanIt.first << " Scan pointer is "
-				<< scanIt.second << endl;
-		cout << "X result is " << scanIt.second->getResult("X") << endl;
+	std::cout << "Reading scans from " << fileName << std::endl;
+	std::ifstream ifs(fileName);
+	if (!ifs.is_open()) {
+		std::string errMsg = "Could not find file " + fileName;
+		throw std::runtime_error(errMsg);
+	}
+	std::cout << "  Found JSON file " << fileName << std::endl;
+	Json::Value scanListJSON;
+	Json::Reader reader;
+	bool parsing_success = reader.parse(ifs, scanListJSON);
+
+	if (!parsing_success) {
+		std::string errMsg = "Parsing failed for file " + fileName;
+		throw std::runtime_error(errMsg);
+	}
+	std::cout << "  Parsing successful\n";
+
+	// Create List of Scan objects by looping through the JSON array and picking JSON objects.
+	vector<WireScanSets::Scan> scanList;
+	if( scanListJSON.isArray() ) {
+		for( auto& scanJSON : scanListJSON ) {
+			scanList.push_back( WireScanSets::ScanJSON(scanJSON) );
+		}
 	}
 
-	usleep(2000000);
-
 	cout << "Creating sets" << endl;
-	WireScanSets::ScanSet setX(scanMap, string("X"));
-	WireScanSets::ScanSet setY(scanMap, string("Y"));
 
-	scanMap.clear();
+	WireScanSets::ScanSet setX(scanList, "X");
+	WireScanSets::ScanSet setY(scanList, "Y");
+	scanList.clear();
 
 	setX.makeGraphs();
 	setX.fitGraphs(0, 90000, kGreen);

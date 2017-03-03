@@ -1,9 +1,11 @@
 {
+	"datatype": "scan",
 	"date": "02/34/2017-12:01:12",
 	"location": "5C11B",
 	"dispersion": 0.0005,
 	"results": [
 		{
+			"datatype" : "result",
 			"direction": "X",
 			"emittance": 0.0000051855,
 			"data": {
@@ -12,8 +14,9 @@
 			}
 		},
 		{
-			"emittance": 0.0000021567,
+			"datatype" : "result",
 			"direction": "Y",
+			"emittance": 0.0000021567,
 			"data": {
 				"sigma": 1.000,
 				"delta": 0.050

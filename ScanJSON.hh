@@ -24,6 +24,9 @@ namespace WireScanSets {
 
 class ScanJSON: public Scan {
 protected:
+	// value of datatype attribute in JSON
+	static std::string dataType;
+
 	// these are attributes needed for ScanSetJSON class
 	static std::vector<std::string> neededAttributes;
 
@@ -39,6 +42,12 @@ protected:
 				throw std::runtime_error(errMsg);
 			}
 		}
+		if( jsonData["datatype"].asString() != dataType ) {
+			std::string errMsg = std::string("Expected datatype <")
+					+ dataType + "> but got " + jsonData[""].asString() + ">";
+			throw std::runtime_error(errMsg);
+		}
+
 		std::cout << "Will call Scan constructor with arguments : " << std::endl;
 		;
 		for (auto& attrib : neededAttributes) {

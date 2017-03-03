@@ -10,8 +10,10 @@
 using namespace std;
 
 namespace WireScanSets {
+// Value of datatype attribute in JSON
+string ScanJSON::dataType = "scan";
 // Map of required attributes for a JSON describing a scan
-vector<string> ScanJSON::neededAttributes = { "date", "location", "dispersion", "results" };
+vector<string> ScanJSON::neededAttributes = { "datatype", "date", "location", "dispersion", "results" };
 // Map showing the pathlength for various harp location from 5C11 harp in mm-s.
 map<string,double> ScanJSON::scannerPositions = {
 		{"5C11"		, 0			},
