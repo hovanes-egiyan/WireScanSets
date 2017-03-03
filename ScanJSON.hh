@@ -119,7 +119,6 @@ public:
 	}
 
 	virtual ~ScanJSON() {
-		// TODO Auto-generated destructor stub
 	}
 
 	virtual double getZ(std::string location) {
