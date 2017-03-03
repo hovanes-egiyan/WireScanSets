@@ -7,9 +7,6 @@
 
 #include "FileNameFinder.hh"
 
-namespace WireScanSets {
-
-
 #include "boost/program_options.hpp"
 
 #include "FileNameFinder.hh"
@@ -17,6 +14,11 @@ namespace WireScanSets {
 using namespace std;
 
 namespace po = boost::program_options;
+
+
+namespace WireScanSets {
+
+
 
 FileNameFinder::FileNameFinder( int* ac, char* av[] ) :
 	dirName(""), fileName( "" ) {
@@ -35,6 +37,9 @@ FileNameFinder::FileNameFinder( int* ac, char* av[] ) :
 	          options(desc).positional(p).run(), vm);
 	po::notify(vm);
 
+	if( vm.count("help" )) {
+		cerr<< desc << endl;
+	}
 	if (vm.count("input-file")) {
 		cout << "Input file is: "
 		         << vm["input-file"].as< string >() << "\n";
@@ -45,6 +50,7 @@ FileNameFinder::FileNameFinder( int* ac, char* av[] ) :
 		         << vm["input-directory"].as< string >() << "\n";
 		dirName = vm["input-directory"].as< string >();
 	}
+
 
 	parseFullFileName( dirName, fileName );
 

@@ -1,0 +1,80 @@
+[
+	{
+		"datatype": "scan",
+		"date": "03/02/2017 16:50:19",
+		"location": "5C11",
+		"dispersion": 0.0005,
+		"results": [
+			{
+				"datatype": "result",
+				"direction": "X",
+				"emittance": 5.1855e-6,
+				"data": {
+					"sigma": 1.293,
+					"delta": 0.060
+				}
+			},
+			{
+				"datatype": "result",
+				"direction": "Y",
+				"emittance": 2.1567e-06,
+				"data": {
+					"sigma": 0.8314,
+					"delta": 0.060
+				}
+			}
+		]
+	},
+	{
+		"datatype": "scan",
+		"date": "03/02/2017 16:53:15",
+		"location": "5C11B",
+		"dispersion": 0.0005,
+		"results": [
+			{
+				"datatype": "result",
+				"direction": "X",
+				"emittance": 5.1855e-6,
+				"data": {
+					"sigma": 1.179,
+					"delta": 0.060
+				}
+			},
+			{
+				"datatype": "result",
+				"direction": "Y",
+				"emittance": 2.1567e-06,
+				"data": {
+					"sigma": 0.7968,
+					"delta": 0.060
+				}
+			}
+		]
+	},
+		{
+		"datatype": "scan",
+		"date": "02/02/2017 17:08:37",
+		"location": "Radiator",
+		"dispersion": 0.0005,
+		"results": [
+			{
+				"datatype": "result",
+				"direction": "X",
+				"emittance": 5.1855e-6,
+				"data": {
+					"sigma": 0.8925,
+					"delta": 0.1500
+				}
+			},
+			{
+				"datatype": "result",
+				"direction": "Y",
+				"emittance": 2.1567e-06,
+				"data": {
+					"sigma": 0.5828,
+					"delta": 0.1500
+				}
+			}
+		]
+	}
+]

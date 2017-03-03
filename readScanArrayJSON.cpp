@@ -86,15 +86,15 @@ int main(int argc, char **argv) {
 
 	TH1D zeroX("zeroX", "zerox", 100, -1000, 90000);
 	zeroX.SetMinimum(0);
-	zeroX.SetMaximum(4.0);
-	zeroX.SetXTitle("Distance from 5C11 harp, mm");
+	zeroX.SetMaximum(1.8);
+	zeroX.SetXTitle("Distance from 5C11 harp (mm)");
 	zeroX.SetYTitle("#sigma_{x}^{2} (mm^{2})");
 	zeroX.GetYaxis()->SetTitleOffset(1.2);
 
 	TH1D zeroY("zeroY", "zeroY", 100, -1000, 90000);
 	zeroY.SetMinimum(0);
-	zeroY.SetMaximum(4.0);
-	zeroY.SetXTitle("Distance from 5C11 harp, mm");
+	zeroY.SetMaximum(1.8);
+	zeroY.SetXTitle("Distance from 5C11 harp (mm)");
 	zeroY.SetYTitle("#sigma_{y}^{2} (mm^{2})");
 	zeroY.GetYaxis()->SetTitleOffset(1.2);
 
