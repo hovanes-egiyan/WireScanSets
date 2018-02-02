@@ -60,7 +60,7 @@ TF1* ScanSet::fitGraphs(double xMin, double xMax, Color_t col) {
 	fitFun2->SetParName(0, "alpha0");
 	fitFun2->SetParName(1, "beta0");
 	fitFun2->SetParameter(0, scanList[0]->getSigma2().second / emittance);
-	fitFun2->SetParameter(1, 2.0e-35);
+	fitFun2->SetParameter(1, 200);
 	fitFun2->SetParLimits(1, 1.0e-35, 10000000);
 
 	graphSigma2->SetMarkerColor(col);

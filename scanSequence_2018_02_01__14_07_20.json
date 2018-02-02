@@ -1,0 +1,80 @@
+[
+	{
+		"datatype": "scan",
+		"date": "02/01/2018 13:56:56",
+		"location": "5C11",
+		"dispersion": 0.0005,
+		"results": [
+			{
+				"datatype": "result",
+				"direction": "X",
+				"emittance": 5e-6,
+				"data": {
+					"sigma": 0.9487,
+					"delta": 0.02
+				}
+			},
+			{
+				"datatype": "result",
+				"direction": "Y",
+				"emittance": 3e-6,
+				"data": {
+					"sigma": 0.8755,
+					"delta": 0.020
+				}
+			}
+		]
+	},
+	{
+		"datatype": "scan",
+		"date": "02/01/2018 14:04:16",
+		"location": "5C11B",
+		"dispersion": 0.0004,
+		"results": [
+			{
+				"datatype": "result",
+				"direction": "X",
+				"emittance": 5e-6,
+				"data": {
+					"sigma": 0.8407,
+					"delta": 0.020
+				}
+			},
+			{
+				"datatype": "result",
+				"direction": "Y",
+				"emittance": 3e-6,
+				"data": {
+					"sigma": 0.6382,
+					"delta": 0.020
+				}
+			}
+		]
+	},
+	{
+		"datatype": "scan",
+		"date": "02/01/2018 14:07:20",
+		"location": "RAD00",
+		"dispersion": 0.0004,
+		"results": [
+			{
+				"datatype": "result",
+				"direction": "X",
+				"emittance": 5e-6,
+				"data": {
+					"sigma": 0.6864,
+					"delta": 0.130
+				}
+			},
+			{
+				"datatype": "result",
+				"direction": "Y",
+				"emittance": 3e-6,
+				"data": {
+					"sigma": 0.4173,
+					"delta": 0.150
+				}
+			}
+		]
+	}
+]

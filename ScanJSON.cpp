@@ -18,7 +18,7 @@ vector<string> ScanJSON::neededAttributes = { "datatype", "date", "location", "d
 map<string,double> ScanJSON::scannerPositions = {
 		{"5C11"		, 0			},
 		{"5C11B"	, 12163		},
-		{"Radiator"	, 16420		},
-		{"AD00C"	, 36000		}
+		{"RAD00"	, 16420		},
+		{"AD00C"	, 33420		}
 	};
 } /* namespace WireScanSets */

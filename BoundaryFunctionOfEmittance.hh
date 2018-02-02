@@ -9,6 +9,7 @@
 #define BOUNDARYFUNCTIONOFEMITTANCE_HH_
 
 #include <math.h>
+#include <iostream>
 
 #include "FunctionOfEmittance.hh"
 #include "DerivativeFunctionOfEpsilon.hh"

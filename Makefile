@@ -8,7 +8,7 @@ ROOT_LIBS += $(shell $(ROOTSYS)/bin/root-config --libs)
 
 INCLUDE_DIR += -I/usr/include/jsoncpp -I/usr/include/boost -I$(ROOT_INCLUDE) 
 
-OBJS =	ScanResultJSON.o  ScanResult.o ScanJSON.o Scan.o ScanSet.o FileNameFinder.o 
+OBJS =	ScanResultJSON.o  ScanResult.o ScanJSON.o Scan.o ScanSet.o ScanSetJSON.o FileNameFinder.o BoundaryFunctionOfEmittance.o DerivativeFunctionOfEpsilon.o 
 
 LIBS += $(ROOT_LIBS)  -ljsoncpp -lboost_program_options
 
