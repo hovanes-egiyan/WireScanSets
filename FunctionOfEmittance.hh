@@ -41,4 +41,6 @@ public:
 
 } /* namespace WireScanSets */
 
+
+
 #endif /* FUNCTIONOFEMITTANCE_HH_ */
